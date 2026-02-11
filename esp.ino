@@ -10,8 +10,8 @@
 
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-const char* ssid = "keenetic";
-const char* password = "3120919631";
+const char* ssid = "wifiId";
+const char* password = "password";
 
 WebServer server(80);
 
