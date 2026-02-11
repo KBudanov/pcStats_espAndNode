@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC System Monitor</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark p-4">
+  <div class="container">
+    <h1 class="mb-4 text-white">PC System Monitor</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card p-3 shadow-sm">
+          <div class="card-title">CPU Temp</div>
+        <div class="stat-value fs-3" id="cpuTemp"><%= stats.cpuTemp.latest %> °C</div>
+          <div class="stat-middle text-muted">middle: <%= stats.cpuTemp.middle %> °C</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card p-3 shadow-sm">
+          <div class="card-title">GPU Temp</div>
+     <div class="stat-value fs-3" id="gpuTemp"><%= stats.gpuTemp.latest %> °C</div>
+          <div class="stat-middle text-muted">middle: <%= stats.gpuTemp.middle %> °C</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card p-3 shadow-sm">
+          <div class="card-title">POWER</div>
+          <div class="stat-value fs-3" id="power"><%= stats.power.latest %> W</div>
+          <div class="stat-middle text-muted">middle: <%= stats.power.middle %> W</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card p-3 shadow-sm">
+          <div class="card-title">RAM Used</div>
+          <div class="stat-value fs-3" id="ramUsed"><%= stats.ramUsed.latest %> %</div>
+          <div class="stat-middle text-muted">middle: <%= stats.ramUsed.middle %> %</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card p-3 shadow-sm">
+          <div class="card-title">Session Uptime</div>
+          <div class="stat-value fs-3" id="sessionUptime"><%= stats.sessionUptime %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+async function fetchStats() {
+  try {
+    const res = await fetch("/api/stats");
+    const stats = await res.json();
+
+   
+    document.getElementById("cpuTemp").innerText = stats.cpuTemp + " °C";
+    document.getElementById("gpuTemp").innerText = stats.gpuTemp + " °C";
+    document.getElementById("power").innerText = stats.totalPower + " W";
+    document.getElementById("ramUsed").innerText = stats.ramUsed + " %";
+    document.getElementById("sessionUptime").innerText = stats.sessionUptimeFormatted;
+  } catch (err) {
+    console.error("Failed to fetch stats:", err);
+  }
+}
+
+fetchStats();
+
+
+setInterval(fetchStats, 1000);
+</script>
+
+</body>
+</html>
