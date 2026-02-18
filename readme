@@ -1,0 +1,162 @@
+🖥️ PC System Monitor (Node.js + ESP32 + SQLite)
+
+A real-time PC monitoring dashboard that:
+
+📊 Collects CPU, GPU, Power, RAM stats
+
+💾 Stores data in SQLite
+
+🌐 Displays stats on a styled web dashboard
+
+🔄 Auto-refreshes every second
+
+📡 Sends stats to an ESP32 with OLED display
+
+🚀 Features
+
+CPU Temperature monitoring
+
+GPU Temperature monitoring
+
+GPU Power monitoring
+
+RAM usage percentage
+
+Session uptime
+
+Median value from last N stats
+
+Auto-updating web dashboard (1 second refresh)
+
+SQLite persistent storage
+
+ESP32 HTTP integration
+
+🛠 Tech Stack
+
+Node.js 
+
+Express
+
+SQLite3
+
+EJS
+
+Bootstrap
+
+systeminformation 
+
+ESP32 
+
+SSD1306 OLED display
+
+📦 Installation
+1️⃣ Clone the repository
+git clone https://github.com/YOUR_USERNAME/pc-system-monitor.git
+cd pc-system-monitor
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Add this to your package.json
+{
+  "type": "module"
+}
+
+
+(This removes the ES module warning.)
+
+4️⃣ Start the server (from admin profile)
+node server.js
+
+Or with nodemon:
+
+npx nodemon server.js
+
+🌐 Open Dashboard
+http://localhost:3000
+
+
+The dashboard updates automatically every second.
+
+🗄 Database
+
+SQLite database file:
+
+stats.db
+
+
+Table structure:
+
+id
+
+timestamp
+
+cpuTemp
+
+gpuTemp
+
+cpuPower
+
+gpuPower
+
+totalPower
+
+ramUsed
+
+uptime (seconds)
+
+sessionUptimeFormatted 
+
+To reset database:
+
+Remove-Item .\stats.db
+
+🔄 API Endpoint
+
+Latest stats:
+
+GET /api/stats
+
+
+Returns:
+
+{
+  "cpuTemp": 27.8,
+  "gpuTemp": 42,
+  "totalPower": 41.07,
+  "ramUsed": 44,
+  "sessionUptimeFormatted": "0h 1m 22s"
+}
+
+📡 ESP32 Integration
+
+The server sends stats to ESP32 every 5 seconds via HTTP.
+
+ESP32 displays:
+
+CPU Temp
+
+GPU Temp
+
+Power
+
+RAM
+
+Session Uptime
+
+📷 Screenshot
+
+📈 Future Improvements
+
+Real-time charts (Chart.js)
+
+WebSocket instead of polling
+
+Alerts for high temperature
+
+Multiple PC support
+
+👨‍💻 Author
+
+Stadnichenko Vlad
